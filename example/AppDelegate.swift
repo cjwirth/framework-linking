@@ -8,6 +8,9 @@
 
 import UIKit
 
+import Framework1
+import Framework2
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -15,6 +18,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+
+        // Both frameworks reference AppCenter, and we use one implementation from one framework,
+        // and pass it into a class from the other framework to bring them together.
+        //
+        // This isn't _exactly_ how our actual use case is set up, but it seemed like a minimized
+        // version of something quite similar to bring out the behavior I'm experiencing.
+        let delegate = Framework2CrashDelegate.shared
+        Framework1Manager.start(delegate: delegate)
+
         return true
     }
 
